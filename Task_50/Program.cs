@@ -23,18 +23,18 @@ void PrintErrorMessageInt (string userNumber)
     Console.WriteLine(" не является натуральным числом.");
 }
 
-int AutoGenerationElementPosition(int minRangeValue, int maxRangeValue)
+int GenerationRandomIntegerNumbers(int minRangeValue, int maxRangeValue)
 {
     int number = new Random().Next(minRangeValue, maxRangeValue + 1);
     return number;
 }
 
-void CreatArrayRandomNaturalNumbers(int[,] creatArray)
+void CreateArrayRandomNaturalNumbers(int[,] createArray) 
 {
     int minRangeValue = 1, maxRangeValue = 100;
-    for (int i = 0; i < creatArray.GetLength(0); i++)
-        for (int j = 0; j < creatArray.GetLength(1); j++)
-            creatArray[i, j] = AutoGenerationElementPosition(minRangeValue, maxRangeValue);
+    for (int i = 0; i < createArray.GetLength(0); i++)
+        for (int j = 0; j < createArray.GetLength(1); j++)
+            createArray[i, j] = GenerationRandomIntegerNumbers(minRangeValue, maxRangeValue);
 }
 
 void PrintArray(int[,] array)
@@ -47,7 +47,7 @@ void PrintArray(int[,] array)
     }
 }
 
-int CheckPositiveInt (string messageForUser)
+int CheckNaturalNumbers (string messageForUser)
 {
     int number = 0, i = 0;
     string userNumber = string.Empty;
@@ -76,22 +76,16 @@ int EnterElementPosition(string direction, string designation)
 {
     string messegeForUser = string.Empty;
     messegeForUser = $"Введите номер {direction} искомого элемента ({designation}): ";
-    int position = CheckPositiveInt(messegeForUser);
+    int position = CheckNaturalNumbers(messegeForUser);
     return position; 
 }
 
-void ScrollArray()
-{
-
-}
-
-
 // Автогенерация двумерного массива случайных натуральных чисел
 int minRangeValue = 1, maxRangeValue = 100;
-int row = AutoGenerationElementPosition(minRangeValue, maxRangeValue);
-int column = AutoGenerationElementPosition(minRangeValue, maxRangeValue);
+int row = GenerationRandomIntegerNumbers(minRangeValue, maxRangeValue);
+int column = GenerationRandomIntegerNumbers(minRangeValue, maxRangeValue);
 int[,] array = new int[row, column];
-CreatArrayRandomNaturalNumbers(array);
+CreateArrayRandomNaturalNumbers(array);
 // Печать массива на экран (опционально)
 Console.Write("Ели Вы желаете просмотреть заданный массив, введите любой символ, если нет," + 
                 " просто нажмите Enter");
@@ -111,7 +105,7 @@ int optionNumber = 0;
 while(optionNumber != 1 && optionNumber != 2)
 {
     messegeForUser = "Введите номер варианта: ";
-    optionNumber = CheckPositiveInt(messegeForUser);
+    optionNumber = CheckNaturalNumbers(messegeForUser);
     if(optionNumber != 1 && optionNumber != 2)
     {
         TitleInputErrorMessage(); 
@@ -142,11 +136,11 @@ else
     if(Console.ReadLine() != "")
     {
         messegeForUser = "Введите новое максимальное значение диапазона: ";
-        maxRangeValue = CheckPositiveInt(messegeForUser);
+        maxRangeValue = CheckNaturalNumbers(messegeForUser);
     }
-        m = AutoGenerationElementPosition(minRangeValue, maxRangeValue);
-        n = AutoGenerationElementPosition(minRangeValue, maxRangeValue);
-    }
+        m = GenerationRandomIntegerNumbers(minRangeValue, maxRangeValue);
+        n = GenerationRandomIntegerNumbers(minRangeValue, maxRangeValue);
+}
 if(m > row || n > column) 
 {
     Console.Write($"Заданный двумерный массив имеет размерность ({row}x{column}).");
